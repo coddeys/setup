@@ -1,20 +1,25 @@
 #!/bin/bash
 # Simple setup.sh for configuring Ubuntu 13.10 EC2 instance
-# for headless setup.
 
-# Install git, curl
-sudo apt-get install -y git
-sudo apt-get install -y curl
-
-# Install emacs24
-# https://launchpad.net/~cassou/+archive/emacs
+# Add emacs24 repository
 sudo add-apt-repository -y ppa:cassou/emacs
 sudo apt-get -qq update
-sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
+
+# Install git, curl, zsh, emacs, tmux
+sudo apt-get install -y git curl git-core zsh emacs24-nox emacs24-el emacs24-common-non-dfsg tmux
 
 # Install Heroku toolbelt
-# https://toolbelt.heroku.com/debian
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+# Install oh-my-zsh 
+curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+chsh -s /bin/zsh
+
+# RVM stable with ruby
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+
+
 
 # git pull and install dotfiles as well
 cd $HOME
